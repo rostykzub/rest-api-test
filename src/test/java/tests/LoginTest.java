@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.testng.Assert.assertNotNull;
 import static steps.LoginSteps.postLogin;
+import static util.Config.addProperty;
 import static util.Config.getProperty;
 
 public class LoginTest {
@@ -18,11 +19,13 @@ public class LoginTest {
             .build();
 
 
-    @Test(description = "POST /auth/login -> check 200 status and validate body")
+    @Test(description = "POST /auth/login -> check 200 status and validate body. Set token property")
     public void testLogin() {
         LoginResponseModel loginResponse = postLogin(loginRequestModel);
         assertThat(loginResponse.getEmail()).isEqualTo(getProperty("email"));
         assertNotNull(loginResponse.getToken());
         assertThat(loginResponse.getEmail()).isEqualTo(loginRequestModel.getEmail());
+
+        addProperty("token",loginResponse.getToken()); // Setting token property for future use in tests
     }
 }

@@ -5,8 +5,6 @@ import io.restassured.specification.RequestSpecification;
 import model.LoginRequestModel;
 import model.LoginResponseModel;
 import static util.Config.getProperty;
-
-
 import static io.restassured.RestAssured.given;
 
 public class LoginSteps {
